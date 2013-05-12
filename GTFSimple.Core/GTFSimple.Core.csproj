@@ -42,7 +42,9 @@
     <Compile Include="Feed\FareAttributes.cs" />
     <Compile Include="Feed\FareRules.cs" />
     <Compile Include="Feed\FeedInfo.cs" />
+    <Compile Include="Feed\FieldNameAttribute.cs" />
     <Compile Include="Feed\Frequency.cs" />
+    <Compile Include="Feed\OneZeroConverter.cs" />
     <Compile Include="Feed\Route.cs" />
     <Compile Include="Feed\Shape.cs" />
     <Compile Include="Feed\Stop.cs" />

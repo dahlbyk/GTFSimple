@@ -12,11 +12,7 @@ namespace GTFSimple.Kml
     {
         static void Test()
         {
-            var kml = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "crtransit.kml"));
-
-            //Console.WriteLine(kml);
-
-            var root = XDocument.Parse(kml).Root;
+            var root = XDocument.Load(FilePath("crtransit.kml")).Root;
             if (root == null)
                 return;
 
@@ -29,19 +25,11 @@ namespace GTFSimple.Kml
                            let placemarkId = (string)placemark.Attribute("id")
                            let placemarkName = (string)placemark.Element(ns + "name")
                            let description = (string) placemark.Element(ns + "description")
-                           let idMatch = 
-                               Regex.Match(description, @"<td>ID</td>[^<]+<td>(?<id>[^<]+)</td>",
-                                           RegexOptions.Singleline).Groups["id"]
-                           let id = idMatch == null ? null : idMatch.Value
-                           let streetMatch = 
-                               Regex.Match(description, @"<td>(?<street>[^<]+)</td>",
-                                           RegexOptions.Singleline).Groups["street"]
-                           let street = streetMatch == null ? null : streetMatch.Value
                            let routeMatch =
                                Regex.Match(description, @"<td>Route</td>[^<]+<td>(?<route>[^<]+)</td>",
                                            RegexOptions.Singleline).Groups["route"]
                            let route = routeMatch == null ? "(none)" : routeMatch.Value
-                           group new { street, id, description, placemarkId, placemarkName, placemark } by route
+                           group new { description, placemarkId, placemarkName, placemark } by route
                            into g
                            orderby g.Key
                            select g;
@@ -51,8 +39,21 @@ namespace GTFSimple.Kml
                 Console.WriteLine(g.Key);
                 foreach (var s in g)
                     Console.WriteLine("  " + s.placemarkId + ": " + s.placemarkName);
+
+                var kml = new XDocument(
+                    new XDeclaration("1.0", "UTF-8", "yes"),
+                    new XElement(ns + "Document"
+                        , new XElement(ns + "name", "Route " + g.Key)
+                                 , g.Select(x => x.placemark)
+                                 ));
+                kml.Save(FilePath(g.Key + ".kml"));
             }
 
+        }
+
+        private static string FilePath(string kml)
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, kml);
         }
     }
 }

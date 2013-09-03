@@ -1,0 +1,42 @@
+﻿@model GTFSimple.Web.Models.StopTimesModel
+
+@{
+    ViewBag.Title = "title";
+}
+
+<html>
+<body>
+    <form method="POST">
+        <p>
+            @Html.TextBoxFor(m => m.TripPrefix)<br />
+            @Html.TextAreaFor(m => m.Stops, new { rows = 30 })
+            @Html.TextAreaFor(m => m.Trips, new { rows = 30 })
+        </p>
+        <p>
+            <input type="submit" name="Go" />
+        </p>
+
+        @if (Model.HasStopTimes)
+        {
+            <h2>Stop Times</h2>
+            <table>
+                <tr>
+                    <th>TripId</th>
+                    <th>Arrival_Time</th>
+                    <th>Departure_Time</th>
+                    <th>Stop_Id</th>
+                </tr>
+                @foreach (var stopTime in Model.GenerateStopTimes())
+                {
+                    <tr>
+                        <td>@stopTime.TripId</td>
+                        <td>@stopTime.ArrivalTime</td>
+                        <td>@stopTime.DepartureTime</td>
+                        <td>@stopTime.StopId</td>
+                    </tr>
+                }
+            </table>
+        }
+    </form>
+</body>
+</html>

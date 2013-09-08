@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StopTimesController.cs" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">
@@ -102,6 +103,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\StopTimes\Index.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

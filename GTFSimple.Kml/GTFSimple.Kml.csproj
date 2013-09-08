@@ -29,12 +29,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\packages\DotNetZip.Reduced.1.9.1.8\lib\net20\Ionic.Zip.Reduced.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpKml">
-      <HintPath>..\packages\SharpKml.1.1.0.0\lib\net40\SharpKml.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -48,12 +42,15 @@
     <Content Include="crtransit.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GTFSimple.Core\GTFSimple.Core.csproj">
       <Project>{ec32bc77-ff19-4088-b9fb-17085421b9a8}</Project>
       <Name>GTFSimple.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpKml\SharpKml\SharpKml.csproj">
+      <Project>{53f12a60-e9cc-44bc-8366-1ae3ab2b547d}</Project>
+      <Name>SharpKml %28SharpKml\SharpKml%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

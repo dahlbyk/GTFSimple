@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTFSimple.Kml", "GTFSimple.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTFSimple.Web", "GTFSimple.Web\GTFSimple.Web.csproj", "{D1E98506-3F09-46DE-9032-B62A90A21821}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharpKml", "SharpKml", "{CE7CAEA6-318A-43AB-A95B-EC852CD7486F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpKml", "SharpKml\SharpKml\SharpKml.csproj", "{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "SharpKml\UnitTests\UnitTests.csproj", "{B8E1EC2A-64F4-4DCB-85EF-B1D65B42C4AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "SharpKml\Examples\Examples.csproj", "{823EA980-0DE9-4A92-A001-C9179833127B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,9 +33,26 @@ Global
 		{D1E98506-3F09-46DE-9032-B62A90A21821}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1E98506-3F09-46DE-9032-B62A90A21821}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1E98506-3F09-46DE-9032-B62A90A21821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E1EC2A-64F4-4DCB-85EF-B1D65B42C4AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E1EC2A-64F4-4DCB-85EF-B1D65B42C4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E1EC2A-64F4-4DCB-85EF-B1D65B42C4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E1EC2A-64F4-4DCB-85EF-B1D65B42C4AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823EA980-0DE9-4A92-A001-C9179833127B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823EA980-0DE9-4A92-A001-C9179833127B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823EA980-0DE9-4A92-A001-C9179833127B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823EA980-0DE9-4A92-A001-C9179833127B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{53F12A60-E9CC-44BC-8366-1AE3AB2B547D} = {CE7CAEA6-318A-43AB-A95B-EC852CD7486F}
+		{B8E1EC2A-64F4-4DCB-85EF-B1D65B42C4AB} = {CE7CAEA6-318A-43AB-A95B-EC852CD7486F}
+		{823EA980-0DE9-4A92-A001-C9179833127B} = {CE7CAEA6-318A-43AB-A95B-EC852CD7486F}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = GTFSimple.Core\GTFSimple.Core.csproj

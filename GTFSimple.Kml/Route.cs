@@ -30,5 +30,10 @@ namespace GTFSimple.Kml
                                  .ToList(),
             };
         }
+
+        public RouteSegment GetSegment(string id)
+        {
+            return Segments.FirstOrDefault(s => s.Id == id);
+        }
     }
 }

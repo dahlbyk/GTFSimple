@@ -11,7 +11,7 @@ namespace GTFSimple.Kml
             var gtc = new Vector(41.9703, -91.66, 0);
 
             var repo = new Repository();
-            foreach (var t in repo.GetRoutes().Take(1))
+            foreach (var t in repo.GetRoutes())
             {
                 var r = repo.GetRoute(t.Item1);
                 Console.WriteLine(r.Name);

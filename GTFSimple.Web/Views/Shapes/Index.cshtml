@@ -1,0 +1,43 @@
+﻿@model GTFSimple.Web.Models.ShapesModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Route Shapes</title>
+</head>
+<body>
+    <form method="POST">
+        <p>
+            @Html.DropDownListFor(m => m.RouteId, Model.Routes)
+            @Html.TextBoxFor(m => m.ShapeId)<br />
+            @Html.TextAreaFor(m => m.Segments, new { rows = 30 })
+        </p>
+        <p>
+            <input type="submit" value="Go" />
+        </p>
+
+        @if (Model.HasShape)
+        {
+            <h2>Shape</h2>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>point_latitude</th>
+                    <th>point_longitude</th>
+                    <th>point_sequence</th>
+                </tr>
+                @foreach (var point in Model.GenerateShape())
+                {
+                    <tr>
+                        <td>@point.Id</td>
+                        <td>@point.PointLatitude</td>
+                        <td>@point.PointLongitude</td>
+                        <td>@point.PointSequence</td>
+                    </tr>
+                }
+            </table>
+        }
+    </form>
+</body>
+</html>

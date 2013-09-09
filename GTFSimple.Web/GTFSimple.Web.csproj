@@ -94,11 +94,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShapesController.cs" />
     <Compile Include="Controllers\StopTimesController.cs" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShapesModel.cs" />
     <Compile Include="Models\StopTimesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,6 +109,8 @@
     <Content Include="Views\StopTimes\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shapes\Index.cshtml" />
+    <Content Include="crtransit.kml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,6 +122,14 @@
     <ProjectReference Include="..\GTFSimple.Core\GTFSimple.Core.csproj">
       <Project>{EC32BC77-FF19-4088-B9FB-17085421B9A8}</Project>
       <Name>GTFSimple.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTFSimple.Kml\GTFSimple.Kml.csproj">
+      <Project>{524DC5B6-3D2A-40D8-AC3A-61FC708F815A}</Project>
+      <Name>GTFSimple.Kml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpKml\SharpKml\SharpKml.csproj">
+      <Project>{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}</Project>
+      <Name>SharpKml %28SharpKml\SharpKml%29</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

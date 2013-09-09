@@ -1,55 +1,52 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Xml.Linq;
+using SharpKml.Base;
 
 namespace GTFSimple.Kml
 {
     public class Sandbox
     {
-        static void Test()
+        public void Routes()
         {
-            var root = XDocument.Load(FilePath("crtransit.kml")).Root;
-            if (root == null)
-                return;
+            var gtc = new Vector(41.9703, -91.66, 0);
 
-            var ns = (XNamespace)"http://www.opengis.net/kml/2.2";
-            var document = from doc in root.Elements(ns + "Document")
-                           from folder in doc.Elements(ns + "Folder")
-                           from placemark in folder.Elements(ns + "Placemark")
-                           select new Placemark(placemark) into placemark
-                           group placemark by placemark.Route
-                               into g
-                               orderby g.Key
-                               select g;
-
-            foreach (var g in document)
+            var repo = new Repository();
+            foreach (var t in repo.GetRoutes().Take(1))
             {
-                Console.WriteLine(g.Key);
-                foreach (var s in g)
-                    Console.WriteLine("  " + s.Id + ": " + s.Name);
+                var r = repo.GetRoute(t.Item1);
+                Console.WriteLine(r.Name);
 
+                var closest =
+                    r.Segments.Select(s => new { Id = "+" + s.Id, s.Name, (s.Start - gtc).Magnitude })
+                    .Concat(r.Segments.Select(s => new { Id = "-" + s.Id, s.Name, (s.End - gtc).Magnitude }))
+                    .OrderBy(x => x.Magnitude)
+                    .Take(2)
+                    .ToList();
+
+                foreach (var c in closest)
+                    Console.WriteLine("\t{1}\t{2}\t{0:f4}", c.Magnitude, c.Id, c.Name);
+                Console.WriteLine();
+
+                foreach (var p in r.Segments)
+                {
+                    Console.WriteLine("\t{0}\t{1}", p.Id, p.Name);
+                    Console.WriteLine("\t\t{0} to {1}\t\t{2}", p.Start, p.End, (p.Start - p.End).Magnitude);
+
+                    const double epsilon = 0.0011;
+                    var overlaps =
+                        from end in new[] { false, true }
+                        from n in r.Segments
+                        select p.Overlaps(n, end, epsilon)
+                            into o
+                            where o != null
+                            select o;
+
+                    foreach (var o in overlaps.Distinct())
+                        Console.WriteLine("\t\t\t" + o);
+                }
+
+                Console.WriteLine();
             }
-
-            var kml = new XDocument(
-                new XDeclaration("1.0", "UTF-8", "yes"),
-                new XElement(
-                    ns + "Document"
-                    , new XElement(ns + "name", "Transit_Routes")
-                    , document.Select(g =>
-                                      new XElement(
-                                          ns + "Folder"
-                                          , new XElement(ns + "name", "Route " + g.Key)
-                                          , g.Select(x => (XElement)x)
-                                          ))));
-            var filePath = FilePath("ByRoute.kml");
-            Console.WriteLine(filePath);
-            kml.Save(filePath);
-        }
-
-        private static string FilePath(string kml)
-        {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, kml);
         }
     }
 }

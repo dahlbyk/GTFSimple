@@ -30327,9 +30327,6 @@
         </LineString>
       </MultiGeometry>
     </Placemark>
-  </Folder>
-  <Folder id="R07D">
-    <name>Route 07D</name>
     <Placemark id="ID_00217">
       <name>C ST SW</name>
       <Snippet></Snippet>

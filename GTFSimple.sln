@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTFSimple.Tests", "GTFSimple.Tests\GTFSimple.Tests.csproj", "{FDB95B90-0DFE-46D9-9988-F85BD8985568}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTFSimple.Core", "GTFSimple.Core\GTFSimple.Core.csproj", "{EC32BC77-FF19-4088-B9FB-17085421B9A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTFSimple.Kml", "GTFSimple.Kml\GTFSimple.Kml.csproj", "{524DC5B6-3D2A-40D8-AC3A-61FC708F815A}"
@@ -21,6 +23,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDB95B90-0DFE-46D9-9988-F85BD8985568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB95B90-0DFE-46D9-9988-F85BD8985568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB95B90-0DFE-46D9-9988-F85BD8985568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB95B90-0DFE-46D9-9988-F85BD8985568}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC32BC77-FF19-4088-B9FB-17085421B9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC32BC77-FF19-4088-B9FB-17085421B9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC32BC77-FF19-4088-B9FB-17085421B9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +61,6 @@ Global
 		{823EA980-0DE9-4A92-A001-C9179833127B} = {CE7CAEA6-318A-43AB-A95B-EC852CD7486F}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = GTFSimple.Core\GTFSimple.Core.csproj
+		StartupItem = GTFSimple.Tests\GTFSimple.Tests.csproj
 	EndGlobalSection
 EndGlobal

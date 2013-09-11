@@ -5,11 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EC32BC77-FF19-4088-B9FB-17085421B9A8}</ProjectGuid>
+    <ProjectGuid>{FDB95B90-0DFE-46D9-9988-F85BD8985568}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GTFSimple.Core</RootNamespace>
-    <AssemblyName>GTFSimple.Core</AssemblyName>
+    <RootNamespace>GTFSimple.Tests</RootNamespace>
+    <AssemblyName>GTFSimple.Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -30,36 +29,40 @@
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.1.17.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Feed\Agency.cs" />
-    <Compile Include="Feed\Calendar.cs" />
-    <Compile Include="Feed\CalendarDate.cs" />
-    <Compile Include="Feed\FareAttributes.cs" />
-    <Compile Include="Feed\FareRules.cs" />
-    <Compile Include="Feed\FeedInfo.cs" />
-    <Compile Include="Feed\FieldNameAttribute.cs" />
-    <Compile Include="Feed\Frequency.cs" />
-    <Compile Include="Feed\OneZeroConverter.cs" />
-    <Compile Include="Feed\Route.cs" />
-    <Compile Include="Feed\Shape.cs" />
-    <Compile Include="Feed\Stop.cs" />
-    <Compile Include="Feed\StopTime.cs" />
-    <Compile Include="Feed\Transfer.cs" />
-    <Compile Include="Feed\Trip.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Core\Feed\AgencyTests.cs" />
+    <Compile Include="Core\Feed\CalendarDateTests.cs" />
+    <Compile Include="Core\Feed\CalendarTests.cs" />
+    <Compile Include="Core\Feed\FareAttributesTests.cs" />
+    <Compile Include="Core\Feed\FareRulesTests.cs" />
+    <Compile Include="Core\Feed\FeedEntityTestBase.cs" />
+    <Compile Include="Core\Feed\FeedInfoTests.cs" />
+    <Compile Include="Core\Feed\FieldNameAttributeTests.cs" />
+    <Compile Include="Core\Feed\FrequencyTests.cs" />
+    <Compile Include="Core\Feed\RouteTests.cs" />
+    <Compile Include="Core\Feed\ShapeTests.cs" />
+    <Compile Include="Core\Feed\StopTests.cs" />
+    <Compile Include="Core\Feed\StopTimeTests.cs" />
+    <Compile Include="Core\Feed\TransferTests.cs" />
+    <Compile Include="Core\Feed\TripTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\GTFSimple.Core\GTFSimple.Core.csproj">
+      <Project>{EC32BC77-FF19-4088-B9FB-17085421B9A8}</Project>
+      <Name>GTFSimple.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

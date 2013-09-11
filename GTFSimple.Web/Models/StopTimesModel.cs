@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GTFSimple.Core;
+using GTFSimple.Core.Feed;
 
 namespace GTFSimple.Web.Models
 {

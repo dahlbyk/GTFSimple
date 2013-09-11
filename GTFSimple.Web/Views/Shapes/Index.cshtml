@@ -14,7 +14,8 @@
             @Html.TextAreaFor(m => m.Segments, new { rows = 30 })
         </p>
         <p>
-            <input type="submit" value="Go" />
+            <input type="submit" value="Preview" />
+            <input type="submit" name="csv" value="Generate CSV" />
         </p>
 
         @if (Model.HasShape)

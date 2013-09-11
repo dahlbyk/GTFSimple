@@ -1,5 +1,8 @@
-﻿using System.Web.Mvc;
-using GTFSimple.Kml;
+﻿using System.Collections.Generic;
+using System.Web;
+using System.Web.Mvc;
+using CsvHelper;
+using GTFSimple.Core.Feed;
 using GTFSimple.Web.Models;
 
 namespace GTFSimple.Web.Controllers
@@ -24,7 +27,7 @@ namespace GTFSimple.Web.Controllers
 +ID_00020
 ".TrimStart();
 
-        public ActionResult Index(ShapesModel data)
+        public ActionResult Index(ShapesModel data, string csv)
         {
             var model = data ?? new ShapesModel();
 
@@ -32,7 +35,37 @@ namespace GTFSimple.Web.Controllers
             model.ShapeId = model.ShapeId ?? "S01";
             model.Segments = model.Segments ?? defaultSegments;
 
+            if (!string.IsNullOrEmpty(csv))
+                return Csv(model);
+
             return View(model);
+        }
+
+        private ActionResult Csv(ShapesModel model)
+        {
+            return new CsvResult<Shape>(model.GenerateShape(), model.ShapeId);
+        }
+    }
+
+    internal class CsvResult<T> : FileResult where T : class
+    {
+        private readonly IEnumerable<T> rows;
+        private readonly string attachmentFilename;
+
+        public CsvResult(IEnumerable<T> rows, string attachmentFilename)
+            : base("text/csv")
+        {
+            this.rows = rows;
+            this.attachmentFilename = attachmentFilename;
+        }
+
+        protected override void WriteFile(HttpResponseBase response)
+        {
+            if(!string.IsNullOrEmpty(attachmentFilename))
+                response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.csv", attachmentFilename));
+
+            using (var csvWriter = new CsvWriter(response.Output))
+                csvWriter.WriteRecords(rows);
         }
     }
 }

@@ -62,17 +62,5 @@ namespace GTFSimple.Web.Models
                     };
                 }
         }
-
-        private static TimeSpan? ParseTime(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-                return null;
-
-            var match = time.Match(s);
-            return match.Success
-                       ? new TimeSpan(match.Groups["h"].Value.ConvertToInt32() ?? 0,
-                                      match.Groups["m"].Value.ConvertToInt32() ?? 0, 0)
-                       : default(TimeSpan?);
-        }
     }
 }

@@ -48,7 +48,7 @@ namespace GTFSimple.Web.Models
                 (
                     from line in Segments.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
                     let reverse = line[0] == '-'
-                    let id = line.Substring(1)
+                    let id = line.Split(' ')[0].Substring(1)
                     select new { id, reverse }
                 ).ToList();
 

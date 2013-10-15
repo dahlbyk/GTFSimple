@@ -47,6 +47,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Interactive">
       <HintPath>..\packages\Ix-Main.0.9.0.2\lib\Net4\System.Interactive.dll</HintPath>
     </Reference>
@@ -92,6 +95,18 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\tfsv\calendarpopup.js" />
+    <Content Include="Content\tfsv\index.html" />
+    <Content Include="Content\tfsv\labeled_marker.js" />
+    <Content Include="Content\tfsv\map.js" />
+    <Content Include="Content\tfsv\mm_20_blue.png" />
+    <Content Include="Content\tfsv\mm_20_blue_trans.png" />
+    <Content Include="Content\tfsv\mm_20_red_trans.png" />
+    <Content Include="Content\tfsv\mm_20_shadow.png" />
+    <Content Include="Content\tfsv\mm_20_shadow_trans.png" />
+    <Content Include="Content\tfsv\mm_20_yellow.png" />
+    <Content Include="Content\tfsv\style.css" />
+    <Content Include="Content\tfsv\svgcheck.vbs" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +164,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>10003</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:32852/</IISUrl>
+          <IISUrl>http://localhost:8765/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

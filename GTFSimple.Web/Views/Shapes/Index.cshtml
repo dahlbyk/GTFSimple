@@ -5,21 +5,38 @@
 <html>
 <head>
     <title>Route Shapes</title>
+    <link href="~/Content/tfsv/style.css" rel="stylesheet" type="text/css" />
+    <style>
+        form { float: left; }
+        #map-wrapper {
+            margin-left: 200px;
+        }
+        input[type=text] { width: 80px; }
+    </style>
 </head>
-<body>
-    <form method="POST">
-        <p>
-            @Html.DropDownListFor(m => m.RouteId, Model.Routes)
-            @Html.TextBoxFor(m => m.ShapeId)<br />
-            @Html.TextAreaFor(m => m.Segments, new { rows = 30 })
-        </p>
-        <p>
-            <input type="submit" value="Preview" />
-            <input type="submit" name="csv" value="Generate CSV" />
-        </p>
+<body onunload="if(GUnload) { GUnload(); }">
+    <div id='content'>
+        <form method="POST">
+            <p>
+                @Html.DropDownListFor(m => m.RouteId, Model.Routes)
+                @Html.TextBoxFor(m => m.ShapeId)<br />
+                @Html.TextAreaFor(m => m.Segments, new { rows = 30 })
+            </p>
+            <p>
+                <input type="submit" value="Preview" /><br/>
+                <input type="submit" name="csv" value="Generate CSV" />
+            </p>
+            <p id="clicked"></p>
+        </form>
 
         @if (Model.HasShape)
         {
+            <script id="segments" type="text/template">
+                @Html.Raw(Model.GenerateSegmentsJson())
+            </script>
+            <div id="map-wrapper">
+                <div id="map"></div>
+            </div>
             <h2>Shape</h2>
             <table>
                 <tr>
@@ -39,6 +56,36 @@
                 }
             </table>
         }
-    </form>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyAZTTRO6RC6LQyKCD3JODhxbClsZl95P9U" type="text/javascript"></script>
+    <script src="~/Content/tfsv/map.js"></script>
+    <script type="text/javascript">
+        var map;
+        $(function () {
+            window.segments = JSON.parse($('#segments').text().trim());
+
+            if (GBrowserIsCompatible()) {
+                var map_dom = document.getElementById("map");
+                map = new GMap2(map_dom);
+                map.addControl(new GLargeMapControl());
+                map.addControl(new GMapTypeControl());
+                map.addControl(new GOverviewMapControl());
+                map.enableScrollWheelZoom();
+                var bb = new GLatLngBounds(new GLatLng(41.889324, -91.754883),new GLatLng(42.058688, -91.553555));
+                map.setCenter(bb.getCenter(), map.getBoundsZoomLevel(bb));
+                map.enableDoubleClickZoom();
+
+                $.each(segments,
+                    function() {
+                        displayPolyLine(this,
+                            function(s) {
+                                $('#clicked').text(s && s.Id);
+                            });
+                    });
+                $('#map-wrapper').css('height', ($(window).height() - 12) + 'px');
+            }
+        });
+    </script>
 </body>
 </html>

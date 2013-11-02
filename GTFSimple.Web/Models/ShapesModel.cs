@@ -90,7 +90,7 @@ namespace GTFSimple.Web.Models
             this.reverse = reverse;
         }
 
-        public string Id { get { return rs.Id; } }
+        public string Id { get { return (reverse ? '-' : '+') + rs.Id; } }
 
         public string Name { get { return rs.Name; } }
 

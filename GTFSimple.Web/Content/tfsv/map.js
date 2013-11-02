@@ -565,15 +565,29 @@ function displayPolyLine(segment, callback) {
     }
 }
 
+var last_ll = null;
+
 function buildPolyLine(segment, i, callback) {
-    var polyline, j, linePoints = [],
+    var polyline, j, ll = null, linePoints = [],
         points = segment.Coordinates;
 
     for (j = 0; j < points[i].length; ++j) {
-        var ll = new GLatLng(points[i][j].Latitude, points[i][j].Longitude);
+        ll = new GLatLng(points[i][j].Latitude, points[i][j].Longitude);
         expandBoundingBox(ll);
         linePoints[linePoints.length] = ll;
     }
+
+    if (last_ll) {
+        var pointsBetween = [last_ll.ll, linePoints[0]],
+            polylineBetween = new GPolyline(pointsBetween, "#0000FF", 6),
+            last_id = last_ll.id;
+        polylineBetween.clickListener =
+            GEvent.addListener(polylineBetween, "click", function() { callback(last_id, segment); });
+        map.addOverlay(polylineBetween);
+    }
+
+    last_ll = { ll: ll, id: segment.Id };
+    console.log(last_ll);
 
     polyline = new GPolyline(linePoints, "#FF0000", 4);
     polyline.clickListener =

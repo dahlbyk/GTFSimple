@@ -51,7 +51,7 @@ namespace GTFSimple.Web.Models
         {
             var segments = GenerateSegments();
 
-            return segments.SelectMany(s => s.Coordinates)
+            return segments.SelectMany(s => s.Coordinates.SelectMany(c => c))
                            .DistinctUntilChanged()
                            .Select((p, i) => new Shape
                            {
@@ -94,9 +94,9 @@ namespace GTFSimple.Web.Models
 
         public string Name { get { return rs.Name; } }
 
-        public IEnumerable<Vector> Coordinates
+        public IEnumerable<IEnumerable<Vector>> Coordinates
         {
-            get { return reverse ? rs.Coordinates.Reverse() : rs.Coordinates; }
+            get { return reverse ? rs.Coordinates.Select(c => c.Reverse()).Reverse() : rs.Coordinates; }
         }
     }
 }

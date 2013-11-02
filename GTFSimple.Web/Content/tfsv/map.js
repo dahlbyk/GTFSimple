@@ -556,18 +556,29 @@ function expandBoundingBox(latLng) {
  * @param {Array} List of lat,lng pairs
  */
 function displayPolyLine(segment, callback) {
-    var linePoints = Array(),
+    var i, polyline;
+
+    for (i = 0; i < segment.Coordinates.length; ++i) {
+        polyline = buildPolyLine(segment, i, callback);
+        map.addOverlay(polyline);
+        map.setCenter(boundsOfPolyLine.getCenter(), map.getBoundsZoomLevel(boundsOfPolyLine));
+    }
+}
+
+function buildPolyLine(segment, i, callback) {
+    var polyline, j, linePoints = [],
         points = segment.Coordinates;
 
-    for (i = 0; i < points.length; ++i) {
-        var ll = new GLatLng(points[i].Latitude, points[i].Longitude);
+    for (j = 0; j < points[i].length; ++j) {
+        var ll = new GLatLng(points[i][j].Latitude, points[i][j].Longitude);
         expandBoundingBox(ll);
         linePoints[linePoints.length] = ll;
     }
-    var polyline = new GPolyline(linePoints, "#FF0000", 4);
-    map.addOverlay(polyline);
-    polyline.clickListener = GEvent.addListener(polyline, "click", function () { callback(segment); });
-    map.setCenter(boundsOfPolyLine.getCenter(), map.getBoundsZoomLevel(boundsOfPolyLine));
+
+    polyline = new GPolyline(linePoints, "#FF0000", 4);
+    polyline.clickListener =
+        GEvent.addListener(polyline, "click", function () { callback(i, segment); });
+    return polyline;
 }
 
 function displayTripStopTimes(stops, arrivalTimes, departureTimes) {

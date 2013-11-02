@@ -14,7 +14,7 @@ namespace GTFSimple.Kml
 
         public virtual string Name { get; private set; }
 
-        public virtual IEnumerable<Vector> Coordinates { get; private set; }
+        public virtual IEnumerable<IEnumerable<Vector>> Coordinates { get; private set; }
 
         public virtual Vector Start
         {
@@ -22,7 +22,7 @@ namespace GTFSimple.Kml
             {
                 return Coordinates == null
                            ? null
-                           : Coordinates.FirstOrDefault();
+                           : Coordinates.SelectMany(c => c).FirstOrDefault();
             }
         }
 
@@ -32,7 +32,7 @@ namespace GTFSimple.Kml
             {
                 return Coordinates == null
                            ? null
-                           : Coordinates.LastOrDefault();
+                           : Coordinates.SelectMany(c => c).LastOrDefault();
             }
         }
 
@@ -65,11 +65,10 @@ namespace GTFSimple.Kml
             {
                 Id = placemark.Id,
                 Name = placemark.Name,
-                Coordinates = (
-                                  from LineString line in geo.Geometry
-                                  from c in line.Coordinates
-                                  select c
-                              ).ToList(),
+                Coordinates = geo.Geometry
+                                 .Cast<LineString>()
+                                 .Select(line => line.Coordinates)
+                                 .ToList(),
             };
         }
     }

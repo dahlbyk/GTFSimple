@@ -79,8 +79,8 @@
                 $.each(segments,
                     function() {
                         displayPolyLine(this,
-                            function(s) {
-                                $('#clicked').text(s && s.Id);
+                            function(i, s) {
+                                $('#clicked').text(s && s.Id + ' ' + i);
                             });
                     });
                 $('#map-wrapper').css('height', ($(window).height() - 12) + 'px');
